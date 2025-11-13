@@ -21,9 +21,12 @@
     <ClCompile Include="interface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CommandIdentifier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CommandParser.h">
+    <ClInclude Include="CommandIdentifier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

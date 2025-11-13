@@ -109,10 +109,11 @@ int main() {
     while (true) {
         cout << "\nSQL> ";
         cin.getline(command, 1000);
-
+        /*
         if (strlen(command) > 0) {
             Command(command);
         }
+        */
     }
 
     return 0;
