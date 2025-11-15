@@ -4,6 +4,8 @@
 #include "CommandIdentifier.h"
 using namespace std;
 
+string Trim(string s);
+
 bool validateCreateTable(string input, CommandType type);
 bool validateDropTable(string input, CommandType type);
 bool validateExit(string input, CommandType type);
