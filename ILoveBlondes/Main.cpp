@@ -1,3 +1,4 @@
+/*
 #include <iostream>
 #include <string.h>
 
@@ -109,12 +110,43 @@ int main() {
     while (true) {
         cout << "\nSQL> ";
         cin.getline(command, 1000);
-        /*
+        
         if (strlen(command) > 0) {
             Command(command);
         }
-        */
+        
     }
+
+    return 0;
+}
+*/
+
+#include <iostream>
+#include <string>
+#include "Class_Column.h"
+#include "ValidationFunctions.h"
+
+using namespace std;
+
+int main() {
+    string test1 = "CREATE TABLE myTable ((id, INTEGER, 10, 0), (name, TEXT, 50, ''), (score, FLOAT, 5, 0.0))";
+    string test2 = "CREATE TABLE 123Invalid ((id, INTEGER, 10, 0))"; // nume invalid
+    string test3 = "CREATE TABLE tableWithoutColumns ()"; // fara coloane
+
+    if (validateCreateTable(test1, CREATE_TABLE))
+        cout << "Test1 OK\n";
+    else
+        cout << "Test1 FAIL\n";
+
+    if (validateCreateTable(test2, CREATE_TABLE))
+        cout << "Test2 OK\n";
+    else
+        cout << "Test2 FAIL\n";
+
+    if (validateCreateTable(test3, CREATE_TABLE))
+        cout << "Test3 OK\n";
+    else
+        cout << "Test3 FAIL\n";
 
     return 0;
 }

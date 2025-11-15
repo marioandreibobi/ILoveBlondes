@@ -123,11 +123,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Class_Column.cpp" />
     <ClCompile Include="CommandIdentifier.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ValidaitionFunctions.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Class_Column.h" />
     <ClInclude Include="CommandIdentifier.h" />
     <ClInclude Include="ValidationFunctions.h" />
   </ItemGroup>

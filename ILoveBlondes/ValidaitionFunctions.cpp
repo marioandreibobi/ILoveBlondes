@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include "Class_Column.h"
 #include "ValidationFunctions.h"
 using namespace std;
 
@@ -47,7 +48,49 @@ bool validateCreateTable(string input, CommandType type) {
 
 	string columnsStr = cmd.substr(parenthesisStart + 1, parenthesisEnd - parenthesisStart - 1);
 
+	const int MAX_COLUMNS = 100;
+	string columns[MAX_COLUMNS];
+	int numColumns = 0;
+
+	int nivel = 0;
+	int colStart = -1;
+
+	for (int i = 0; i < columnsStr.length(); i++) {
+		char c = columnsStr[i];
+
+		if (c == '(') {
+			nivel++;
+			if (nivel == 1) colStart = i;
+		}
+		else if (c == ')') {
+			if (nivel == 1) {
+				string colDef = Trim(columnsStr.substr(colStart + 1, i - colStart - 1));
+
+				int comma1 = colDef.find(',');
+				int comma2 = colDef.find(',', comma1+1);
+				int comma3 = colDef.find(',', comma2 + 1);
+
+				string name = Trim(colDef.substr(0, comma1));
+				string type = Trim(colDef.substr(comma1 + 1, comma2 - comma1 - 1));
+				int size = stoi(Trim(colDef.substr(comma2 + 1, comma3 - comma2 - 1)));
+				string defVal = Trim(colDef.substr(comma3 + 1));
+
+				try {
+					Column tmp;
+					tmp.setName(name);
+					tmp.setType(type);
+					tmp.setSize(size);
+					tmp.setDefaultValue(defVal);
+				}
+				catch (invalid_argument& e) {
+					return false; 
+				}
+				numColumns++;
+			}
+			nivel--;
+		}
+	}
 
 
-	return true;
+	return numColumns > 0;
 }
