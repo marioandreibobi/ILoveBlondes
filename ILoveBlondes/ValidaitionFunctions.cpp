@@ -153,7 +153,7 @@ bool ValidateExit(string s, CommandType type) {
 	return true;
 }
 
-bool ValidateInsert(string s, CommandType type) {
+bool validateInsert(string s, CommandType type) {
 	string cmd = UpperCaseTransf(s);
 
 	cmd = Trim(cmd);
@@ -163,13 +163,45 @@ bool ValidateInsert(string s, CommandType type) {
 	}
 
 	int pos = 11;
-	string TableName = Trim(cmd.substr(pos));
 
-	if (!TableName.empty()) return false;
+	// Skip spaces
+	while (pos < cmd.length() && cmd[pos] == ' ') pos++;
 
-	if (!isalpha(TableName[0])) return false;
+	int startName = pos;
+
+	while (pos < cmd.length() && (isalnum(cmd[pos]) || cmd[pos] == '_'))
+		pos++;
+
+	string TableName = cmd.substr(startName, pos - startName);
+
+	if (TableName.empty()) return false;
+
+	while (pos < cmd.length() && cmd[pos] == ' ')pos++;
+
+	if (cmd.rfind("VALUES", pos) != pos) {
+		return false;
+	}
+	pos += 6;
+
+	while (pos < cmd.length() && cmd[pos] == ' ')pos++;
+
+	if (pos >= cmd.length() || cmd[pos] != '(') return false;
+
+	int open = pos;
+	int close = cmd.find(')', open);
+	if (close == string::npos) return false;
+
+	string values = cmd.substr(open + 1, close - open - 1);
+	if (Trim(values).empty())
+		return false;
 
 
-
-
+	return true;
 }
+//ALEX FA TU URM FUNCTII DE VALIDARE ASEMANATOR CU CE AM FCT EU
+//bool validateSelect(string input, CommandType type);
+//bool validateUpdate(string input, CommandType type);
+//bool validateDisplayTable(string input, CommandType type);
+//bool validateCreateIndex(string input, CommandType type);
+//bool validateDropIndex(string input, CommandType type);
+//bool validateDelete(string input, CommandType type);

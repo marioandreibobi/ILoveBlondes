@@ -148,5 +148,23 @@ int main() {
     else
         cout << "Test3 FAIL\n";
 
+
+    string tests[] = {
+        "INSERT INTO users VALUES(1)",
+        "INSERT INTO table1 VALUES(10,20,30)",
+        "   INSERT INTO    clients    VALUES   (   1 , 2 , 3   )",
+        "INSERT INTO student VALUES(\"Alex\", 10)",
+        "INSERT INTO users (1,2)",
+        "INSERT INTO VALUES(1,2)",
+        "INSERT INTO x VALUES 1,2,3)",
+        "INSERT INTO x VALUES()"
+    };
+
+    for (string t : tests) {
+        cout << "\"" << t << "\"  =>  "
+            << (validateInsert(t, CommandType::INSERT) ? "VALID" : "INVALID")
+            << endl;
+    }
+
     return 0;
 }
