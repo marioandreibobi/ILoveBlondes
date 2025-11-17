@@ -152,3 +152,24 @@ bool ValidateExit(string s, CommandType type) {
 
 	return true;
 }
+
+bool ValidateInsert(string s, CommandType type) {
+	string cmd = UpperCaseTransf(s);
+
+	cmd = Trim(cmd);
+
+	if (cmd.rfind("INSERT INTO", 0) != 0) {
+		return false;
+	}
+
+	int pos = 11;
+	string TableName = Trim(cmd.substr(pos));
+
+	if (!TableName.empty()) return false;
+
+	if (!isalpha(TableName[0])) return false;
+
+
+
+
+}
