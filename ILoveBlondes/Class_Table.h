@@ -8,15 +8,15 @@ class Table {
 private:
 	string name = "";
 	Column* columns = nullptr;
-	int noColoumns = 0;
+	int noColumns = 0;
 	static int TABLE_COUNT;
 	const int MAX_SIZE = 99;
 public:
 	Table();
 	//setters
-	void setName();
-	void setNoColumns();
-	void setColumns();
+	void setName(string Name);
+	void setNoColumns(int nocol);
+	void setColumns(string* col, int nocol);
 	//getters
 	string getName();
 	Column* getColumns();
@@ -26,5 +26,3 @@ public:
 
 	~Table();
 };
-
-int static Table::TABLE_COUNT = 0;
